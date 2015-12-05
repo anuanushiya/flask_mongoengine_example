@@ -1,17 +1,7 @@
 from flask import Flask, render_template
-import mongoengine as me
-from datetime import datetime
-
+from models import Page
 
 app = Flask(__name__)
-
-me.connect('database_name')
-
-# This could go in models.py
-class Page(me.Document):
-    title = me.StringField(required=True)
-    body = me.StringField()
-    created_at = me.DateTimeField(default=datetime.now())
 
 
 @app.route('/')
