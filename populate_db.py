@@ -3,11 +3,32 @@
 import mongoengine as me
 from models import Page
 from datetime import datetime
+from faker import Factory
+from config import DATABASE_NAME
 
-me.connect('database_name')
 
-page1 = Page(title='Saluton, Mondo!', body='This is the body.')
-page2 = Page(title='This is another page', body='Some body text for page #2.')
+def create_pages(quantity):
+    """Creates pages and saves them in the database."""
+    # Connect to database
+    me.connect(DATABASE_NAME)
 
-page1.save()
-page2.save()
+    # Instantiate a fake data factory
+    fake = Factory.create()
+
+    for page in range(1, quantity+1):
+        # Instantiate a new Page object (from models.py)
+        current_page = Page()
+
+        # Add fake data to the fields
+        current_page['title'] = ' '.join(fake.words()).capitalize()
+        current_page['author'] = fake.name()
+        current_page['body'] = fake.text()
+        print('Saving a new page: {} by {}'.format(current_page['title'],
+                                                   current_page['author']))
+
+        # Save the page
+        current_page.save()
+
+
+if __name__ == '__main__':
+    create_pages(10)
