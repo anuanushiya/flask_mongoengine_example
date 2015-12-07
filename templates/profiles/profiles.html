@@ -2,17 +2,6 @@
 
 {% block content %}
 <h1>Profile Downloader Page</h1>
-
-{% if messages %}
-<!-- If a flash() message has been sent, it will display here. -->
-<div style="background-color: yellow; padding: 9px;">
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
 <p>Enter a Github username to fetch their profile as JSON and save the raw JSON to MongoDB.</p>
 
 <form action="/get-profile/" method="POST" class="form-inline">

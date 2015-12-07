@@ -6,11 +6,25 @@
     <title>Application</title>
 </head>
 <body>
+
     <div class="container">
         <strong>Menu Links:</strong> <a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('profiles') }}">Profiles</a>
     </div>
+
+    {% if messages %}
+    <!-- If a flash() message has been sent, it will display here. -->
+    <div class="alert alert-info">
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
     <div class="container">
         {% block content %}{% endblock %}
     </div>
+
 </body>
 </html>
