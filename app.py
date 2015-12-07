@@ -25,7 +25,14 @@ def page(page_id):
 def profiles():
     """Lists all profiles in the database and displays a button to fetch another one."""
     profiles = Profile.objects.order_by('-downloaded_at')
-    return render_template('profiles.html', profiles=profiles)
+    return render_template('profiles/profiles.html', profiles=profiles)
+
+
+@app.route('/profile/<profile_id>/')
+def profile(profile_id):
+    """Displays a profile."""
+    profile = Profile.objects.get(id=profile_id)
+    return render_template('profiles/profile.html', profile=profile)
 
 
 @app.route('/get-profile/', methods=['GET', 'POST'])
@@ -33,8 +40,12 @@ def get_profiles():
     """Fetches some JSON and saves it in the database."""
     if request.method == 'POST':
         # Get some JSON
-        print('g')
         r = requests.get('https://api.github.com/users/{}'.format(request.form['username']))
+
+        # Make sure we got some JSON back
+        if r.status_code != 200:
+            flash("That username didn't work. Please try again.")
+            return redirect(url_for(profiles))
 
         # Load the JSON into a Python dict
         profile_dict = r.json()
@@ -58,4 +69,3 @@ if __name__ == '__main__':
     app.config['SESSION_TYPE'] = 'filesystem'
     app.debug = True
     app.run()
-

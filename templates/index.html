@@ -1,3 +1,6 @@
+{% extends 'layout.html' %}
+
+{% block content %}
 <h1>Homepage</h1>
 <p>You can also go to the <a href="/profiles/">profile downloader page</a>.</p>
 <ol>
@@ -5,3 +8,4 @@
         <li><a href="/page/{{page.id}}/">{{page.title}}</a></li>
     {% endfor %}
 </ol>
+{% endblock %}

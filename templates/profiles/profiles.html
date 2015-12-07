@@ -1,3 +1,6 @@
+{% extends 'layout.html' %}
+
+{% block content %}
 <h1>Profile Downloader Page</h1>
 
 {% if messages %}
@@ -12,9 +15,9 @@
 {% endif %}
 <p>Enter a Github username to fetch their profile as JSON and save the raw JSON to MongoDB.</p>
 
-<form action="/get-profile/" method="POST">
-    <input type="text" name="username" placeholder="Enter a Github username&hellip;">
-    <button>Fetch some JSON and save it</button>
+<form action="/get-profile/" method="POST" class="form-inline">
+    <input class="form-control" type="text" name="username" placeholder="Enter a Github username&hellip;">
+    <button class="btn btn-primary">Fetch and save profile JSON</button>
 </form>
 
 <h2>Saved Profiles</h2>
@@ -24,5 +27,4 @@
     <li><a href="/profile/{{profile.id}}/">{{profile.raw_json.login}}</a></li>
     {% endfor %}
 </ol>
-
-<p><a href="/">Back to homepage</a></p>
+{% endblock %}

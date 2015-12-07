@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>{{profile.raw_json.name}}'s Profile</h1>
+<small>Downloaded at {{profile.downloaded_at}}</small>
+
+
+<table class="table table-responsive table-striped">
+    <thead>
+        <tr>
+        <th>Key</th>
+        <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for k, v in profile.raw_json.items() %}
+        <tr>
+            <td>{{k|e}}</td>
+            <td>{{v|e}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
