@@ -10,7 +10,6 @@ The goal of this application is to provide examples on how to use Mongo with Fla
 
 ## TODO
 
-* Flash messages don't work yet.
 * If a user doesn't exist, it crashes.
 
 Feel free to fork it and do a pull request.
