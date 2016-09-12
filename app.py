@@ -68,4 +68,4 @@ if __name__ == '__main__':
     app.secret_key = "don't put this into the repo in production!"
     app.config['SESSION_TYPE'] = 'filesystem'
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0' , port=5000)
